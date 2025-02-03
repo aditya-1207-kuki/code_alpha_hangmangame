@@ -1,5 +1,3 @@
-# code_alpha_hangmangame
-A text based Hangman Game
 import random
 
 # List of words to choose from
@@ -33,4 +31,27 @@ def play_hangman():
 
         # If the letter has already been guessed
         if guess in guessed_letters:
-  
+            print("You've already guessed that letter.")
+            continue
+
+        # Add the guessed letter to the list
+        guessed_letters.append(guess)
+
+        # Check if the guess is in the word
+        if guess in word:
+            print(f"Good guess! The letter {guess} is in the word.")
+        else:
+            incorrect_guesses += 1
+            print(f"Incorrect guess. The letter {guess} is not in the word.")
+
+        # Check if the player has won
+        if all(letter in guessed_letters for letter in word):
+            print(f"\nCongratulations! You've guessed the word: {word}")
+            break
+
+    # If the player has run out of guesses
+    if incorrect_guesses == max_incorrect_guesses:
+        print(f"\nSorry, you've run out of guesses. The word was: {word}")
+
+# Start the game
+play_hangman()
